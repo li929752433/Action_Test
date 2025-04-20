@@ -1,4 +1,4 @@
-name: Build and Obfuscate BPB Panel
+name: Build and Obfuscate Panel
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
   schedule:
     # 每天凌晨1:00运行
-    - cron: "0 6 * * *"
+    - cron: "0 1 * * *"
 
 permissions:
   contents: write
@@ -28,29 +28,14 @@ jobs:
         run: |
           npm install -g javascript-obfuscator
 
-      - name: 下载 BPB worker.js
+      - name: 下载 Panel worker.js
         run: |
-          #wget -O origin.js https://github.com/bia-pain-bache/BPB-Worker-Panel/releases/latest/download/worker.js
           wget -O _worker.js https://github.com/bia-pain-bache/BPB-Worker-Panel/releases/latest/download/worker.js
-
-      #- name: 混淆 BPB worker.js
-      #  run: |
-      #    javascript-obfuscator origin.js --output _worker.js \
-      #      --compact true \
-      #      --control-flow-flattening false \
-      #      --dead-code-injection false \
-      #      --identifier-names-generator mangled \
-      #      --rename-globals false \
-      #      --string-array true \
-      #      --string-array-encoding 'rc4' \
-      #      --string-array-threshold 0.75 \
-      #      --transform-object-keys true \
-      #      --unicode-escape-sequence true
 
       - name: 提交更改
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           branch: main
-          commit_message: ':arrow_up: 更新最新的 BPB 面板'
+          commit_message: ':arrow_up: 更新最新的 Panel'
           commit_author: 'github-actions[bot] <github-actions[bot]@users.noreply.github.com>'
           push_options: '--set-upstream'
