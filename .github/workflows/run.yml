@@ -1,12 +1,12 @@
-name: Build and Obfuscate Panel
+name: Build Panel
 
 on:
   push:
     branches:
       - main
   schedule:
-    # 每天凌晨1:00运行
-    - cron: "0 3 * * *"
+    # 每天凌晨6:00运行
+    - cron: "0 6 * * *"
 
 permissions:
   contents: write
@@ -28,7 +28,7 @@ jobs:
         run: |
           npm install -g javascript-obfuscator
 
-      - name: 下载 Panel worker.js
+      - name: 下载 worker.js
         run: |
           wget -O _worker.js https://github.com/bia-pain-bache/BPB-Worker-Panel/releases/latest/download/worker.js
 
